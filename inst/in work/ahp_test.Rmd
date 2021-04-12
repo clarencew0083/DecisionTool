@@ -99,15 +99,15 @@ colnames(delivery) <- alternatives
 delivery.weights <- as.data.frame(prinEigenVector(delivery))
 row.names(delivery.weights) <- alternatives
 
+ ahpGlobalWeight <- as.data.frame(as.matrix(ahpMatrix) %*% as.matrix(main.weights))
+    row.names(ahpGlobalWeight) <- alternatives
 
-ahpGlobalWeight <- as.data.frame(as.matrix(ahpMatrix) %*% as.matrix(main.weights))
-row.names(ahpGlobalWeight) <- alternatives
+    scoreMatrix <- as.data.frame(as.matrix(ahpMatrix[1,]) * t(as.matrix(main.weights)))
+    score2<- rbind(scoreMatrix, as.data.frame(as.matrix(ahpMatrix[2,]) * t(as.matrix(main.weights))))
+    score3 <- rbind(score2, as.data.frame(as.matrix(ahpMatrix[3,]) * t(as.matrix(main.weights))))
 
-scoreMatrix <- as.data.frame(as.matrix(ahpMatrix[1,]) * t(as.matrix(main.weights)))
-score2<- rbind(scoreMatrix, as.data.frame(as.matrix(ahpMatrix[2,]) * t(as.matrix(main.weights))))
-score3 <- rbind(score2, as.data.frame(as.matrix(ahpMatrix[3,]) * t(as.matrix(main.weights))))
-
-row.names(score3) <- alternatives
+    row.names(score3) <- alternatives
+    colnames(score3) <- criteria
 
 ```
 
